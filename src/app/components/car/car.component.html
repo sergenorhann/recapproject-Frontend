@@ -1,0 +1,139 @@
+<br />
+<div>
+  <label for="filterText" class="form-label">Araba Ara</label>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+          placeholder="Arama ifadesi giriniz." />
+      </div>
+      <div class="col-md-9"><br />
+        <app-car-filter></app-car-filter><br />
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<br />
+
+<thead style="font-size: x-large">
+  ARABALAR
+</thead>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Model Id</th>
+      <th>Renk Id</th>
+      <th>Model Yılı</th>
+      <th>Günlük Fiyat</th>
+      <th>Açıklama</th>
+      <th></th>
+      <th>
+        <button type="button" class="btn btn-outline-success" routerLink="/cars/add">
+          Araba Ekle
+        </button>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let car of cars | carFilter: filterText">
+      <td>{{ car.id }}</td>
+      <td>{{ car.brandId }}</td>
+      <td>{{ car.colorId }}</td>
+      <td>{{ car.modelYear }}</td>
+      <td>{{ car.dailyPrice | currency: "₺" }}</td>
+      <td>{{ car.description }}</td>
+      <td>
+        <form class="container-fluid justify-content-start">
+          <button class="btn btn-outline-warning me-2" type="button" data-bs-toggle="modal" data-bs-target="#updateCar"
+            (click)="setCurrentCar(car)">
+            Güncelle
+          </button>
+          <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteCar"
+            (click)="setCurrentCar(car)">
+            Sil
+          </button>
+          <button (click)="setCurrentCar(car)" routerLink="/cars/cardetailbycarid/{{ car.id }}" type="button"
+            class="btn btn-outline-info me-2">
+            Detaylar
+          </button>
+          <button (click)="addToCart(car)" type="button" class="btn btn-outline-primary">
+            Kirala
+          </button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="updateCar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="updateCarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateCarLabel">Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateCarForm">
+          <label for="brandId" class="col-4 col-form-label">Brand Id</label>
+          <div class="form-group row mb-2">
+            <input type="number" class="form-control" formControlName="brandId" />
+          </div>
+
+          <label for="colorId" class="col-4 col-form-label">Color Id</label>
+          <div class="form-group row mb-2">
+            <input type="number" class="form-control" formControlName="colorId" />
+            <!-- value vermedim. tüm inputlara click yapmak gerekiyor aksi taktirde boş gibi görüyor. color ve brandda tek değer var, sorun olmuyor. -->
+          </div>
+          <label for="modelYear" class="col-4 col-form-label">Model Year</label>
+          <div class="form-group row mb-2">
+            <input type="number" class="form-control" formControlName="modelYear" />
+          </div>
+
+          <label for="dailyPrice" class="col-4 col-form-label">Daily Price</label>
+          <div class="form-group row mb-2">
+            <input type="number" class="form-control" formControlName="dailyPrice" />
+          </div>
+
+          <label for="description" class="col-4 col-form-label">Description</label>
+          <div class="form-group row mb-2">
+            <input type="text" class="form-control" formControlName="description" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateCar()">
+          Güncelle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteCar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="deleteCarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCarLabel">Sil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteCar()">
+          Sil
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

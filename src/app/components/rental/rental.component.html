@@ -1,0 +1,20 @@
+<br />
+<table class="table">
+  <thead style="font-size: x-large;">RENTAL</thead>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Marka Adı</th>
+      <th>Renk Adı</th>
+      <th>Günlük Ücret</th>
+      <th>Müşteri Adı ve Soyadı</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let rental of rentals">
+    <td >{{ rental.id }}</td>
+    <td>{{ rental.brandName }}</td>
+    <td>{{ rental.colorName }}</td>
+    <td>{{ rental.dailyPrice }}</td>
+    <td>{{ rental.firstName }}  {{ rental.lastName }}</td>
+  </tr>
+</table>

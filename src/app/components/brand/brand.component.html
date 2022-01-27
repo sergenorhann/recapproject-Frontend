@@ -1,0 +1,141 @@
+<br />
+<label for="filterText" class="form-label">Marka Ara</label>
+<div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Arama ifadesi giriniz."
+  />
+</div>
+
+<div *ngIf="filterText.length > 2" class="alert alert-success">
+  {{ filterText }} aradınız.
+</div>
+
+<thead style="font-size: x-large">
+  BRANDS
+</thead>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th></th>
+      <th>
+        <button type="button" class="btn btn-outline-success" routerLink="/brands/add" >
+            Marka Ekle
+        </button>
+    </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let brand of brands">
+      <td>{{ brand.id }}</td>
+      <td>{{ brand.name }}</td>
+      <td>
+        <form class="container-fluid justify-content-start">
+          <button
+            class="btn btn-outline-warning me-2"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#updateBrand"
+            (click)="setCurrentBrand(brand)"
+          >
+            Güncelle
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteBrand"
+            (click)="setCurrentBrand(brand)"
+          >
+            Sil
+          </button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="updateBrand"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="updateBrandLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateBrandLabel">Güncelle</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateBrandForm">
+          <label for="colorName" class="col-4 col-form-label">Name</label>
+          <div class="form-group row mb-2">
+            <div class="col-12">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                value="{{ currentBrand ? currentBrand.name : '' }}"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateBrand()">
+          Güncelle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="deleteBrand"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="deleteBrandLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteBrandLabel">Sil</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteBrand()">
+          Sil
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

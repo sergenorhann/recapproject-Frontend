@@ -1,0 +1,36 @@
+<br />
+<table class="table">
+  <thead style="font-size: x-large">
+    Araba Detay
+  </thead>
+
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Marka Adı</th>
+      <th>Renk Adı</th>
+      <th>Günlük Ücret</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let carDetail of carDetails">
+    <td>{{ carDetail.id }}</td>
+    <td>{{ carDetail.brandName }}</td>
+    <td>{{ carDetail.colorName }}</td>
+    <td>{{ carDetail.dailyPrice | currency: "₺"}}</td>
+    <td>
+      <form class="container-fluid justify-content-start">
+        <button (click)="addToCart(carDetail)" type="button" class="btn btn-outline-primary">
+          Kirala
+        </button>
+
+      </form>
+    </td>
+  </tr>
+</tbody>
+</table>
+<div *ngFor="let image of images">
+  <br /><br />
+  <img src="{{ imageUrl }}{{ image.imagePath }}" width="50%" height="50%" alt="..." />
+</div>

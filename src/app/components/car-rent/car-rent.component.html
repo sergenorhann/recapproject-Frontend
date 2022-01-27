@@ -1,0 +1,109 @@
+<body class="text-center">
+  <main class="form-signin">
+    <form [formGroup]="carRentForm">
+      <h1 class="h3 mb-3 fw-normal">Araba Kirala</h1>
+      <div class="form-floating">
+        <input formControlName="carId" type="number" class="form-control" id="carId" value="{{ carId }}" />
+        <label for="carId">Araba Id</label>
+      </div>
+      <div class="form-floating">
+        <input formControlName="customerId" type="number" class="form-control" id="customerId"
+          value="{{ customerId }}" />
+        <label for="customerId">Müşteri Id</label>
+      </div>
+      <div class="form-group">
+        <div class="form-floating">
+          <input formControlName="rentDate" type="date" class="form-control" id="rentDate"
+            placeholder="Kiralama Tarihi" />
+          <label for="rentDate">Kiralama Tarihi</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-floating">
+          <input formControlName="returnDate" type="date" class="form-control" id="returnDate"
+            placeholder="Dönüş Tarihi" />
+          <label for="returnDate">Dönüş Tarihi</label>
+        </div>
+      </div>
+      <div class="checkbox mb-3"></div>
+      <!-- <button class="btn btn-outline-success me-2" type="button" (click)="rent()">-->
+      <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal" data-bs-target="#carRent">
+        Ödeme Yap
+      </button>
+    </form>
+
+    <div class="modal fade" id="carRent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="carRentLabel" aria-hidden="true">
+      <div class="modal-dialog modal-l">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="carRentLabel">Ödeme Onayı</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ngx-payment-card #ngxPaymentCard [IBAN]="iban?.value" [cardNumber]="cNumber?.value"
+              [securityCode]="sc?.value?.toString()" [name]="name?.value">
+            </ngx-payment-card>
+            <div fxLayout="column" fxLayoutAlign=" center" fxFlex>
+              <mat-form-field appearance="outline">
+                <mat-label>Kart No</mat-label>
+                <input #iban matInput (focus)="ngxPaymentCard.flip(true)" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Ad Soyad</mat-label>
+                <input #name matInput />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Son Kullanım Tarihi </mat-label>
+                <input #cNumber matInput type="number" (focus)="ngxPaymentCard.flip(false)" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Güvenlik Kodu</mat-label>
+                <input #sc matInput type="number" (focus)="ngxPaymentCard.flip(false)" />
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">
+              İptal
+            </button>
+            <button type="button"class="btn btn-primary"  (click)="rent()">
+              Öde
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <thead style="font-size: x-large">
+      KİRALANACAK ARABA BİLGİLERİ
+    </thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Model Id</th>
+          <th>Renk Id</th>
+          <th>Model Yılı</th>
+          <th>Günlük Fiyat</th>
+          <th>Açıklama</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let car of cars">
+          <td>{{ car.id }}</td>
+          <td>{{ car.brandId }}</td>
+          <td>{{ car.colorId }}</td>
+          <td>{{ car.modelYear }}</td>
+          <td>{{ car.dailyPrice}}</td>
+          <td>{{ car.description }}</td>
+        </tr>
+      </tbody>
+    </table> -->
+  </main>
+</body>

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <select
+        class="form-select"
+        [(ngModel)]="currentColor"
+        (change)="getSelectedColor()"
+        aria-label="Renkler"
+      >
+        <option [ngValue]="allColor" [selected]="allColorSelected()">
+          Renkler
+        </option>
+        <option *ngFor="let color of colors" [ngValue]="color">
+          {{ color.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <select
+        class="form-select"
+        [(ngModel)]="currentBrand"
+        (change)="getSelectedBrand()"
+        aria-label="Markalar"
+      >
+        <option [ngValue]="allBrand" [selected]="allBrandSelected()">
+          Markalar
+        </option>
+        <option *ngFor="let brand of brands" [ngValue]="brand">
+          {{ brand.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <nav class="navbar">
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          routerLink="{{ setRouterLink() }}"
+        >
+          Filtrele
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="clearRoute()"
+        >
+          Temizle
+        </button>
+      </nav>
+    </div>
+  </div>
+</div>

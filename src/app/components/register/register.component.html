@@ -1,0 +1,100 @@
+<body class="text-center">
+  <main class="form-signin">
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+      <div class="bg-light me-md-3 pt-3 px-3 pt-md-0 px-md-5 text-center">
+        <div class="my-3 p-3">
+          
+          <h2 class="display-5">Kayıt Ol</h2>
+          <p class="lead"></p>
+        </div>
+
+        <div
+          class="bg-dark shadow-sm mx-auto row"
+          style="width: 60%; height: 70%; border-radius: 21px 21px 11px 11px"
+        >
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <form [formGroup]="registerForm">
+              <div class="mb-3">
+                <br />
+                <br />
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        formControlName="firstName"
+                        type="text"
+                        class="form-control"
+                        id="floatingFirstName"
+                        placeholder="FirstName"
+                      />
+                      <label for="floatingFirstName">Ad</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        formControlName="lastName"
+                        type="text"
+                        class="form-control"
+                        id="floatingLastName"
+                        placeholder="Soyad"
+                      />
+                      <label for="floatingLastName">Soyad</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <br />
+
+                <div class="form-floating">
+                  <input
+                    formControlName="email"
+                    type="email"
+                    class="form-control"
+                    id="floatingEmail"
+                    placeholder="Email"
+                  />
+                  <label for="floatingEmail">Email</label>
+                </div>
+              </div>
+              <br />
+              
+              <div class="mb-3">
+                <div class="form-floating">
+                  <input
+                    formControlName="password"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Email"
+                  />
+                  <label for="floatingPassword">Password</label>
+                </div>
+              </div>
+              <br />
+              <div class="mb-3">
+                <br />
+
+                <div>
+                  <button
+                    class="w-100 btn btn-lg btn-primary"
+                    type="submit"
+                    (click)="register()"
+                  >
+                    Kayıt Ol
+                  </button>
+                </div>
+              </div>
+              <br />
+              <br />
+            </form>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+        <div class="my-3 p-3"></div>
+      </div>
+    </div>
+  </main>
+</body>
